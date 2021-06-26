@@ -24,7 +24,37 @@ void ATwoSidesGameMode::ActorDied(AActor* DeadActor)
     }
 }
 
-void ATwoSidesGameMode::UpdateEnemyCount() 
+void ATwoSidesGameMode::UpdateEnemyCount(int32 Val) 
 {
-    
+    EnemyCount = Val;
+}
+
+int32 ATwoSidesGameMode::GetEnemyCount() 
+{
+    return EnemyCount;
+}
+
+int32 ATwoSidesGameMode::GetMaxEnemies() 
+{
+    return MaxEnemies;
+}
+
+int32 ATwoSidesGameMode::GetEnemiesKilled() 
+{
+    return EnemiesKilled;
+}
+
+int32 ATwoSidesGameMode::GetCurrentEnemiesKilled() 
+{
+    return CurrentEnemiesKilled;
+}
+
+void ATwoSidesGameMode::SetCurrentEnemiesKilled(float Val) 
+{
+    CurrentEnemiesKilled = Val;
+}
+
+int32 ATwoSidesGameMode::GetScore() 
+{
+    return Score;
 }
