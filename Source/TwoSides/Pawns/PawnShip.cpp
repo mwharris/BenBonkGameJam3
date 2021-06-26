@@ -20,6 +20,7 @@ void APawnShip::SetupPlayerInputComponent(class UInputComponent* PlayerInputComp
 	PlayerInputComponent->BindAxis("MoveRight", this, &APawnShip::MoveRight);
 	PlayerInputComponent->BindAction("Fire", IE_Pressed, this, &APawnShip::StartFiring);
 	PlayerInputComponent->BindAction("Fire", IE_Released, this, &APawnShip::StopFiring);
+	PlayerInputComponent->BindAction("ChangeColor", IE_Pressed, this, &APawnShip::ChangeColor);
 }
 
 void APawnShip::Tick(float DeltaTime) 
@@ -40,6 +41,30 @@ void APawnShip::Tick(float DeltaTime)
     SetActorRotation(NewRotation);
 }
 
+void APawnShip::StartFiring() 
+{
+    if (!CanFire) return; 
+    Fire();   
+    CanFire = false;
+    GetWorldTimerManager().SetTimer(FireTimer, this, &APawnShip::Fire, FireRate, true);
+}
+
+void APawnShip::StopFiring() 
+{
+    CanFire = true;
+    GetWorldTimerManager().ClearTimer(FireTimer);
+}
+
+void APawnShip::ChangeColor() 
+{
+    SetIsBlue(!GetIsBlue());
+}
+
+void APawnShip::HandleDestruction() 
+{
+    Super::HandleDestruction();
+}
+
 void APawnShip::MoveUp(float AxisValue) 
 {
     VerticalAxis = AxisValue;
@@ -48,25 +73,4 @@ void APawnShip::MoveUp(float AxisValue)
 void APawnShip::MoveRight(float AxisValue) 
 {
     HorizontalAxis = AxisValue;
-}
-
-void APawnShip::StartFiring() 
-{
-    if (!CanFire) return; 
-    UE_LOG(LogTemp, Warning, TEXT("Start Shooting!"));
-    Fire();   
-    CanFire = false;
-    GetWorldTimerManager().SetTimer(FireTimer, this, &APawnShip::Fire, FireRate, true);
-}
-
-void APawnShip::StopFiring() 
-{
-    UE_LOG(LogTemp, Warning, TEXT("Stop Shooting!"));
-    CanFire = true;
-    GetWorldTimerManager().ClearTimer(FireTimer);
-}
-
-void APawnShip::HandleDestruction() 
-{
-    Super::HandleDestruction();
 }

@@ -11,11 +11,18 @@ class TWOSIDES_API APawnBase : public APawn
 
 public:
 	APawnBase();
+	void InitPawn(bool IsColorBlue);
 	virtual void HandleDestruction();
+	void SetIsBlue(bool BlueFlag);
+	bool GetIsBlue();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Projectile Type", meta = (AllowPrivateAccess = "true"))
+	TSubclassOf<class AProjectileBase> ProjectileClass;
 
 protected:
 	virtual void BeginPlay() override;
 	void Fire();
+	void ChangeColor();
 
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
@@ -29,7 +36,11 @@ private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	class UHealthComponent* HealthComp;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Projectile Type", meta = (AllowPrivateAccess = "true"))
-	TSubclassOf<class AProjectileBase> ProjectileClass;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Color", meta = (AllowPrivateAccess = "true"))
+	bool IsBlue = true;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Color", meta = (AllowPrivateAccess = "true"))
+	UMaterialInstance* BlueMaterial;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Color", meta = (AllowPrivateAccess = "true"))
+	UMaterialInstance* RedMaterial;
 
 };

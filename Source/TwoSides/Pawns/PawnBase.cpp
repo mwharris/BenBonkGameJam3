@@ -30,12 +30,18 @@ void APawnBase::BeginPlay()
 	Super::BeginPlay();
 }
 
+void APawnBase::InitPawn(bool IsColorBlue) 
+{
+	SetIsBlue(IsColorBlue);
+}
+
 void APawnBase::Fire() 
 {
 	if (ProjectileClass != nullptr) {
 		FVector Location = ProjectileSpawnPoint->GetComponentLocation();
 		FRotator Rotation = ProjectileSpawnPoint->GetComponentRotation();
 		AProjectileBase* SpawnedProjectile = GetWorld()->SpawnActor<AProjectileBase>(ProjectileClass, Location, Rotation);
+		SpawnedProjectile->InitProjectile(IsBlue, IsBlue ? BlueMaterial : RedMaterial);
 		SpawnedProjectile->SetOwner(this);
 	}
 }
@@ -43,4 +49,22 @@ void APawnBase::Fire()
 void APawnBase::HandleDestruction() 
 {
 	UE_LOG(LogTemp, Warning, TEXT("Called PawnBase::HandleDestruction()"));	
+}
+
+void APawnBase::SetIsBlue(bool IsNewColorBlue) 
+{
+	IsBlue = IsNewColorBlue;
+	if (IsBlue) 
+    {
+        ShipMesh->SetMaterial(1, BlueMaterial);
+    }
+    else
+    {
+        ShipMesh->SetMaterial(1, RedMaterial);
+    }
+}
+
+bool APawnBase::GetIsBlue() 
+{
+	return IsBlue;
 }

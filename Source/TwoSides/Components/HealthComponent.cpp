@@ -1,5 +1,6 @@
 #include "TwoSides/Components/HealthComponent.h"
 #include "TwoSides/GameModes/TwoSidesGameMode.h"
+#include "Kismet/GameplayStatics.h"
 
 UHealthComponent::UHealthComponent()
 {
@@ -10,12 +11,13 @@ void UHealthComponent::BeginPlay()
 {
 	Super::BeginPlay();
 	Health = DefaultHealth;
-	// Bind OnTakeAnyDamage -> TakeDamage()
+	GameModeRef = Cast<ATwoSidesGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
 	GetOwner()->OnTakeAnyDamage.AddDynamic(this, &UHealthComponent::TakeDamage);
 }
 
 void UHealthComponent::TakeDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser) 
 {
+	UE_LOG(LogTemp, Warning, TEXT("We Got Hit, Damage: %f, Before Health: %f, After Health: %f"), Damage, Health, Health - Damage);
 	if (Damage == 0 || Health <= 0) 
 	{
 		return;
@@ -25,10 +27,18 @@ void UHealthComponent::TakeDamage(AActor* DamagedActor, float Damage, const UDam
 	{
 		if (GameModeRef) 
 		{
+			UE_LOG(LogTemp, Warning, TEXT("GameMode is here!"));
 			GameModeRef->ActorDied(GetOwner());
 		}
-		else {
+		else 
+		{
 			UE_LOG(LogTemp, Warning, TEXT("UHealthComponent::TakeDamage: No GameModeRef found!"));
 		}
 	} 
+}
+
+void UHealthComponent::SetDefaultHealth(float NewHealth) 
+{
+	DefaultHealth = NewHealth;
+	Health = DefaultHealth;
 }

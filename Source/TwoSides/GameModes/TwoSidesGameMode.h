@@ -11,5 +11,12 @@ class TWOSIDES_API ATwoSidesGameMode : public AGameModeBase
 
 public:
 	void ActorDied(AActor* DeadActor);
+	void UpdateEnemyCount();
+
+protected:
+	virtual void BeginPlay() override;
+
+private:
+	class APawnShip* PlayerShip;
 
 };

@@ -39,5 +39,6 @@ private:
 	void MoveRight(float AxisValue);
 	void StartFiring();
 	void StopFiring();
+	void ChangeColor();
 
 };

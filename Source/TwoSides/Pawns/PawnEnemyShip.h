@@ -17,4 +17,16 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
+private:
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Properties", meta = (AllowPrivateAccess = "true"))
+	float MovementSpeed = 100.f;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Properties", meta = (AllowPrivateAccess = "true"))
+	float MinSpeed = 50.f;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Properties", meta = (AllowPrivateAccess = "true"))
+	float MaxSpeed = 100.f;
+
+	bool MoveDirectionFlag;
+	float DistanceFromPlayer = 0.f;
+	FVector SpawnLocation;
+
 };

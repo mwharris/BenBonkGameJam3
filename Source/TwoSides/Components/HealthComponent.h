@@ -12,6 +12,7 @@ class TWOSIDES_API UHealthComponent : public UActorComponent
 
 public:	
 	UHealthComponent();
+	void SetDefaultHealth(float NewHealth);
 
 protected:
 	UFUNCTION()
