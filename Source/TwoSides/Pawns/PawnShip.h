@@ -21,11 +21,23 @@ protected:
 private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Properties", meta = (AllowPrivateAccess = "true"))
 	float MovementSpeed = 100.f;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Properties", meta = (AllowPrivateAccess = "true"))
+	float MaxTilt = 7;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Properties", meta = (AllowPrivateAccess = "true"))
+	float TiltSpeed = 80;
 
-	float VerticalMovement = 0.f;
-	float HorizontalMovement = 0.f;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Properties", meta = (AllowPrivateAccess = "true"))
+	float FireRate = 1.f;
+
+	float VerticalAxis = 0.f;
+	float HorizontalAxis = 0.f;
+	float Roll = 0.f;
+	FTimerHandle FireTimer;
+	bool CanFire = true;
 
 	void MoveUp(float AxisValue);
 	void MoveRight(float AxisValue);
+	void StartFiring();
+	void StopFiring();
 
 };

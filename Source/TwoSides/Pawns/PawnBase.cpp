@@ -1,6 +1,9 @@
 #include "TwoSides/Pawns/PawnBase.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/StaticMeshComponent.h"
+#include "Engine/World.h"
+#include "Kismet/GameplayStatics.h"
+#include "TwoSides/Actors/ProjectileBase.h"
 #include "TwoSides/Components/HealthComponent.h"
 
 APawnBase::APawnBase()
@@ -29,7 +32,12 @@ void APawnBase::BeginPlay()
 
 void APawnBase::Fire() 
 {
-	UE_LOG(LogTemp, Warning, TEXT("Called PawnBase::Fire()"));
+	if (ProjectileClass != nullptr) {
+		FVector Location = ProjectileSpawnPoint->GetComponentLocation();
+		FRotator Rotation = ProjectileSpawnPoint->GetComponentRotation();
+		AProjectileBase* SpawnedProjectile = GetWorld()->SpawnActor<AProjectileBase>(ProjectileClass, Location, Rotation);
+		SpawnedProjectile->SetOwner(this);
+	}
 }
 
 void APawnBase::HandleDestruction() 
