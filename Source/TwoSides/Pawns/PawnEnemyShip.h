@@ -24,6 +24,8 @@ private:
 	float MinSpeed = 50.f;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Properties", meta = (AllowPrivateAccess = "true"))
 	float MaxSpeed = 100.f;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Properties", meta = (AllowPrivateAccess = "true"))
+	FVector Scale;
 
 	bool MoveDirectionFlag;
 	float DistanceFromPlayer = 0.f;
