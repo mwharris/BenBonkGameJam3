@@ -8,5 +8,8 @@ UCLASS()
 class TWOSIDES_API ATwoSidesGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
-	
+
+public:
+	void ActorDied(AActor* DeadActor);
+
 };

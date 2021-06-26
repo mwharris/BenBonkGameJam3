@@ -1,6 +1,7 @@
 #include "TwoSides/Pawns/PawnBase.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/StaticMeshComponent.h"
+#include "TwoSides/Components/HealthComponent.h"
 
 APawnBase::APawnBase()
 {
@@ -17,6 +18,8 @@ APawnBase::APawnBase()
 
 	ProjectileSpawnPoint = CreateDefaultSubobject<USceneComponent>(TEXT("Projectile Spawn Point"));
 	ProjectileSpawnPoint->SetupAttachment(ShipMesh);
+
+	HealthComp = CreateDefaultSubobject<UHealthComponent>(TEXT("Health Component"));
 }
 
 void APawnBase::BeginPlay()

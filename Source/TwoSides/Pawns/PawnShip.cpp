@@ -4,11 +4,7 @@
 
 APawnShip::APawnShip() 
 {
-    SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("Spring Arm"));
-    SpringArm->SetupAttachment(RootComponent);
 
-    Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
-    Camera->SetupAttachment(SpringArm);
 }
 
 void APawnShip::BeginPlay() 
@@ -19,11 +15,27 @@ void APawnShip::BeginPlay()
 void APawnShip::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) 
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+	PlayerInputComponent->BindAxis("MoveUp", this, &APawnShip::MoveUp);
+	PlayerInputComponent->BindAxis("MoveRight", this, &APawnShip::MoveRight);
+	PlayerInputComponent->BindAction("Fire", IE_Pressed, this, &APawnShip::Fire);
 }
 
 void APawnShip::Tick(float DeltaTime) 
 {
     Super::Tick(DeltaTime);
+    FVector Movement = FVector(VerticalMovement, HorizontalMovement, 0) * DeltaTime;
+    FVector NewLocation = GetActorLocation() + Movement;
+    SetActorLocation(NewLocation, true);
+}
+
+void APawnShip::MoveUp(float AxisValue) 
+{
+    VerticalMovement = AxisValue * MovementSpeed;
+}
+
+void APawnShip::MoveRight(float AxisValue) 
+{
+    HorizontalMovement = AxisValue * MovementSpeed;
 }
 
 void APawnShip::HandleDestruction() 
