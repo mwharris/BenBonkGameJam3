@@ -11,12 +11,20 @@ APawnBase::APawnBase()
 	PrimaryActorTick.bCanEverTick = true;
 
 	CapsuleComponent = CreateDefaultSubobject<UCapsuleComponent>(TEXT("Capsule Collider"));
+	CapsuleComponent->SetCollisionResponseToAllChannels(ECR_Block);
+    CapsuleComponent->SetCollisionObjectType(ECC_GameTraceChannel1);
+    CapsuleComponent->SetCollisionResponseToChannel(ECC_GameTraceChannel1, ECR_Ignore);
+    CapsuleComponent->SetCollisionResponseToChannel(ECC_Visibility, ECR_Ignore);
 	RootComponent = CapsuleComponent;
 
 	ShipPivotPoint = CreateDefaultSubobject<USceneComponent>(TEXT("Ship Pivot Point"));
 	ShipPivotPoint->SetupAttachment(RootComponent);
 
 	ShipMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Ship Mesh"));
+	ShipMesh->SetCollisionResponseToAllChannels(ECR_Block);
+    ShipMesh->SetCollisionObjectType(ECC_GameTraceChannel1);
+    ShipMesh->SetCollisionResponseToChannel(ECC_GameTraceChannel1, ECR_Ignore);
+    ShipMesh->SetCollisionResponseToChannel(ECC_Visibility, ECR_Ignore);
 	ShipMesh->SetupAttachment(ShipPivotPoint);
 
 	ProjectileSpawnPoint = CreateDefaultSubobject<USceneComponent>(TEXT("Projectile Spawn Point"));

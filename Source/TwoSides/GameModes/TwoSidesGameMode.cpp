@@ -20,6 +20,7 @@ void ATwoSidesGameMode::ActorDied(AActor* DeadActor)
     }
     else if (APawnEnemyShip* DeadEnemy = Cast<APawnEnemyShip>(DeadActor))
     {
+        EnemiesKilled++;
         DeadEnemy->HandleDestruction();
     }
 }

@@ -27,7 +27,7 @@ void AEnemySpawner::SpawnEnemy()
     if (GameModeRef->GetEnemyCount() < GameModeRef->GetMaxEnemies())
     {
         // Spawn a boss every [BossSpawnFrequency] kills
-        if (GameModeRef->GetEnemiesKilled() % BossSpawnFrequency == 0 && GameModeRef->GetEnemiesKilled() != GameModeRef->GetCurrentEnemiesKilled()) 
+        if ((GameModeRef->GetEnemiesKilled() % BossSpawnFrequency) == 0 && GameModeRef->GetEnemiesKilled() != GameModeRef->GetCurrentEnemiesKilled()) 
         {
             SpawnEnemyTwo();
         }
@@ -45,7 +45,9 @@ void AEnemySpawner::SpawnEnemyOne()
     UE_LOG(LogTemp, Warning, TEXT("Spawn Enemy One"));
     if (EnemyOneClass == nullptr) return; 
     GameModeRef->UpdateEnemyCount(GameModeRef->GetEnemyCount() + 1);
-    GetWorld()->SpawnActor<APawnEnemyShip>(EnemyOneClass, GetActorLocation(), FRotator::ZeroRotator);
+    FVector RandomLocation = UKismetMathLibrary::RandomPointInBoundingBox(GetActorLocation(), GetComponentsBoundingBox().GetExtent());
+    RandomLocation.Z = 100;
+    GetWorld()->SpawnActor<APawnEnemyShip>(EnemyOneClass, RandomLocation, FRotator::ZeroRotator);
 }
 
 void AEnemySpawner::SpawnEnemyTwo() 

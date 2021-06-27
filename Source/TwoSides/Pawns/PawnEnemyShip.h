@@ -26,9 +26,14 @@ private:
 	float MaxSpeed = 100.f;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Properties", meta = (AllowPrivateAccess = "true"))
 	FVector Scale;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Properties", meta = (AllowPrivateAccess = "true"))
+	float DistanceFromPlayer = 120.f;
 
+	UFUNCTION()
+	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
+
+	class APawnShip* PlayerShip;
 	bool MoveDirectionFlag;
-	float DistanceFromPlayer = 0.f;
 	FVector SpawnLocation;
 
 };
