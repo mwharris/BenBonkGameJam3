@@ -41,4 +41,6 @@ private:
 	void StopFiring();
 	void ChangeColor();
 
+	class ATwoSidesGameMode* GameModeRef;
+
 };

@@ -5,11 +5,13 @@
 
 void ATwoSidesGameMode::BeginPlay() 
 {
+    Super::BeginPlay();
     PlayerShip = Cast<APawnShip>(UGameplayStatics::GetPlayerPawn(GetWorld(), 0));
     if (PlayerShip == nullptr)
     {
         UE_LOG(LogTemp, Error, TEXT("GameMode: Can't find player ship!"));
     }
+    NotifyUIUpdateScore();
 }
 
 void ATwoSidesGameMode::ActorDied(AActor* DeadActor) 
@@ -22,6 +24,8 @@ void ATwoSidesGameMode::ActorDied(AActor* DeadActor)
     {
         EnemiesKilled++;
         DeadEnemy->HandleDestruction();
+        Score += 100;
+        NotifyUIUpdateScore();
     }
 }
 
@@ -55,7 +59,7 @@ void ATwoSidesGameMode::SetCurrentEnemiesKilled(float Val)
     CurrentEnemiesKilled = Val;
 }
 
-int32 ATwoSidesGameMode::GetScore() 
+int32 ATwoSidesGameMode::GetScore() const
 {
     return Score;
 }

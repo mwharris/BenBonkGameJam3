@@ -1,6 +1,8 @@
 #include "TwoSides/Pawns/PawnShip.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "Kismet/GameplayStatics.h"
+#include "TwoSides/GameModes/TwoSidesGameMode.h"
 
 APawnShip::APawnShip() 
 {
@@ -11,6 +13,11 @@ void APawnShip::BeginPlay()
 {
     Super::BeginPlay();
     Roll = GetActorRotation().Roll;
+    GameModeRef = Cast<ATwoSidesGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
+    if (GameModeRef != nullptr) 
+    {
+        GameModeRef->NotifyUIUpdateHealth();
+    }
 }
 
 void APawnShip::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) 

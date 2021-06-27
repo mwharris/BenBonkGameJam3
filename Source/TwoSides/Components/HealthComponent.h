@@ -13,6 +13,8 @@ class TWOSIDES_API UHealthComponent : public UActorComponent
 public:	
 	UHealthComponent();
 	void SetDefaultHealth(float NewHealth);
+	float GetHealth() const;
+	float GetMaxHealth() const;
 
 protected:
 	UFUNCTION()

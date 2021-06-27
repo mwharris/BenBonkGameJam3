@@ -42,3 +42,13 @@ void UHealthComponent::SetDefaultHealth(float NewHealth)
 	DefaultHealth = NewHealth;
 	Health = DefaultHealth;
 }
+
+float UHealthComponent::GetHealth() const
+{
+	return Health;
+}
+
+float UHealthComponent::GetMaxHealth() const
+{
+	return DefaultHealth;
+}

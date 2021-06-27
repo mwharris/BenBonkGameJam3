@@ -71,3 +71,13 @@ bool APawnBase::GetIsBlue()
 {
 	return IsBlue;
 }
+
+int32 APawnBase::GetHealth() 
+{
+	return HealthComp->GetHealth();
+}
+
+int32 APawnBase::GetMaxHealth() 
+{
+	return HealthComp->GetMaxHealth();
+}

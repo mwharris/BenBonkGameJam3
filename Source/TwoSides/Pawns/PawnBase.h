@@ -21,6 +21,13 @@ public:
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	class UCapsuleComponent* CapsuleComponent;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
+	class UHealthComponent* HealthComp;
+
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	int32 GetHealth();
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	int32 GetMaxHealth();
 	
 	virtual void BeginPlay() override;
 	void Fire();
@@ -33,8 +40,6 @@ private:
 	class UStaticMeshComponent* ShipMesh;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	USceneComponent* ProjectileSpawnPoint;
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
-	class UHealthComponent* HealthComp;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Color", meta = (AllowPrivateAccess = "true"))
 	bool IsBlue = true;
