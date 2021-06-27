@@ -11,9 +11,8 @@ class TWOSIDES_API APawnBase : public APawn
 
 public:
 	APawnBase();
-	void InitPawn(bool IsColorBlue);
 	virtual void HandleDestruction();
-	void SetIsBlue(bool BlueFlag);
+	void SetIsBlue(bool IsNewColorBlue, bool IsPlayer);
 	bool GetIsBlue();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Projectile Type", meta = (AllowPrivateAccess = "true"))

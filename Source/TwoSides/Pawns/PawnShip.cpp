@@ -57,7 +57,7 @@ void APawnShip::StopFiring()
 
 void APawnShip::ChangeColor() 
 {
-    SetIsBlue(!GetIsBlue());
+    SetIsBlue(!GetIsBlue(), true);
 }
 
 void APawnShip::HandleDestruction() 

@@ -13,9 +13,13 @@ APawnEnemyShip::APawnEnemyShip()
 void APawnEnemyShip::BeginPlay() 
 {
     Super::BeginPlay();
+    // Pick red or blue for this enemy
+    SetIsBlue(UKismetMathLibrary::RandomBool(), false);
+    // Set some default values
     MoveDirectionFlag = UKismetMathLibrary::RandomBool();
     MovementSpeed = UKismetMathLibrary::RandomFloatInRange(MinSpeed, MaxSpeed);
     SpawnLocation = GetActorLocation();
+    // Grab a reference to the player
     PlayerShip = Cast<APawnShip>(UGameplayStatics::GetPlayerPawn(GetWorld(), 0));
     if (PlayerShip == nullptr) 
     {

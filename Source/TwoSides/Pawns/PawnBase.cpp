@@ -38,11 +38,6 @@ void APawnBase::BeginPlay()
 	Super::BeginPlay();
 }
 
-void APawnBase::InitPawn(bool IsColorBlue) 
-{
-	SetIsBlue(IsColorBlue);
-}
-
 void APawnBase::Fire() 
 {
 	if (ProjectileClass != nullptr) {
@@ -59,16 +54,16 @@ void APawnBase::HandleDestruction()
 	UE_LOG(LogTemp, Warning, TEXT("Called PawnBase::HandleDestruction()"));	
 }
 
-void APawnBase::SetIsBlue(bool IsNewColorBlue) 
+void APawnBase::SetIsBlue(bool IsNewColorBlue, bool IsPlayer) 
 {
 	IsBlue = IsNewColorBlue;
 	if (IsBlue) 
     {
-        ShipMesh->SetMaterial(1, BlueMaterial);
+        ShipMesh->SetMaterial(IsPlayer ? 1 : 3, BlueMaterial);
     }
     else
     {
-        ShipMesh->SetMaterial(1, RedMaterial);
+        ShipMesh->SetMaterial(IsPlayer ? 1 : 3, RedMaterial);
     }
 }
 

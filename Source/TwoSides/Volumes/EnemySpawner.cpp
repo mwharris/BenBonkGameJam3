@@ -42,17 +42,17 @@ void AEnemySpawner::SpawnEnemy()
 
 void AEnemySpawner::SpawnEnemyOne() 
 {
-    UE_LOG(LogTemp, Warning, TEXT("Spawn Enemy One"));
     if (EnemyOneClass == nullptr) return; 
     GameModeRef->UpdateEnemyCount(GameModeRef->GetEnemyCount() + 1);
+    // Pick a random location in the spawner to spawn
     FVector RandomLocation = UKismetMathLibrary::RandomPointInBoundingBox(GetActorLocation(), GetComponentsBoundingBox().GetExtent());
     RandomLocation.Z = 100;
+    // Spawn the enemy
     GetWorld()->SpawnActor<APawnEnemyShip>(EnemyOneClass, RandomLocation, FRotator::ZeroRotator);
 }
 
 void AEnemySpawner::SpawnEnemyTwo() 
 {
-    UE_LOG(LogTemp, Warning, TEXT("Spawn Enemy Two"));
     if (EnemyTwoClass == nullptr) return; 
     GameModeRef->SetCurrentEnemiesKilled(GameModeRef->GetEnemiesKilled());
     GetWorld()->SpawnActor<APawnEnemyShip>(EnemyTwoClass, GetActorLocation(), FRotator::ZeroRotator);
