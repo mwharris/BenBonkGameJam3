@@ -42,8 +42,6 @@ private:
 	int32 Score;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Spawning", meta = (AllowPrivateAccess = "true"))
 	int32 TopScore;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Effects", meta = (AllowPrivateAccess = "true"))
-	TSubclassOf<class UMatineeCameraShake> CameraShake;
 
 	float EnemiesKilled = 0.f;
 	float CurrentEnemiesKilled = 0.f;

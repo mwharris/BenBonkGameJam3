@@ -30,9 +30,6 @@ void ATwoSidesGameMode::ActorDied(AActor* DeadActor)
             TopScore = Score;
         }
         NotifyUIUpdateScore();
-        // Play Camera Shake
-        GetWorld()->GetFirstPlayerController()->PlayerCameraManager->StartCameraShake(CameraShake);
-        // UGameplayStatics::PlayWorldCameraShake(GetWorld(), CameraShake, FVector::ZeroVector, 0, 0);
         // Destroy the dead enemy
         DeadEnemy->HandleDestruction();
     }

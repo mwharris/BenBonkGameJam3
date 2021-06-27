@@ -51,7 +51,10 @@ void APawnBase::Fire()
 
 void APawnBase::HandleDestruction() 
 {
+	// Play particle effect
 	UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), DeathEffect, GetActorLocation(), FRotator::ZeroRotator);
+	// Play camera shake effect
+	GetWorld()->GetFirstPlayerController()->PlayerCameraManager->StartCameraShake(DeathCameraShake);
 }
 
 void APawnBase::SetIsBlue(bool IsNewColorBlue, bool IsPlayer) 

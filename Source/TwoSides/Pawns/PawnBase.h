@@ -50,5 +50,7 @@ private:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Effects", meta=(AllowPrivateAccess="true"))
 	UParticleSystem* DeathEffect;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Effects", meta=(AllowPrivateAccess="true"))
+	TSubclassOf<class UMatineeCameraShake> DeathCameraShake;
 
 };
