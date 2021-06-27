@@ -48,4 +48,7 @@ private:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Color", meta = (AllowPrivateAccess = "true"))
 	UMaterialInstance* RedMaterial;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Effects", meta=(AllowPrivateAccess="true"))
+	UParticleSystem* DeathEffect;
+
 };

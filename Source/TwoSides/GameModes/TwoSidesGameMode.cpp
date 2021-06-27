@@ -24,7 +24,12 @@ void ATwoSidesGameMode::ActorDied(AActor* DeadActor)
     {
         EnemiesKilled++;
         DeadEnemy->HandleDestruction();
+        // Update our Scores here and in the UI
         Score += 100;
+        if (Score > TopScore) 
+        {
+            TopScore = Score;
+        }
         NotifyUIUpdateScore();
     }
 }

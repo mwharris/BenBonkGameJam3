@@ -35,6 +35,8 @@ private:
 	float DestructTime = 3.f;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Color", meta = (AllowPrivateAccess = "true"))
 	bool IsBlue = true;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Effects", meta=(AllowPrivateAccess="true"))
+	UParticleSystem* HitEffect;
 
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);

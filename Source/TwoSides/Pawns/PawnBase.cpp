@@ -51,7 +51,7 @@ void APawnBase::Fire()
 
 void APawnBase::HandleDestruction() 
 {
-	UE_LOG(LogTemp, Warning, TEXT("Called PawnBase::HandleDestruction()"));	
+	UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), DeathEffect, GetActorLocation(), FRotator::ZeroRotator);
 }
 
 void APawnBase::SetIsBlue(bool IsNewColorBlue, bool IsPlayer) 
