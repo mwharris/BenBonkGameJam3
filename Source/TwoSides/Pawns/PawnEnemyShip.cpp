@@ -51,3 +51,8 @@ void APawnEnemyShip::HandleDestruction()
     Super::HandleDestruction();
     Destroy();
 }
+
+int32 APawnEnemyShip::GetScoreValue() const
+{
+    return ScoreValue;
+}

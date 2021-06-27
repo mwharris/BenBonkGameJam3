@@ -18,8 +18,6 @@ public:
 	void NotifyUIUpdateHealth();
 	UFUNCTION(BlueprintImplementableEvent)
 	void NotifyUIGameOver();
-	UFUNCTION(BlueprintImplementableEvent)
-	void PlayCameraShake(TSubclassOf<class UCameraShakeBase> CamShake, FVector Epicenter);
 
 	void ActorDied(AActor* DeadActor);
 	void UpdateEnemyCount(int32 Val);
@@ -44,6 +42,8 @@ private:
 	int32 Score;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Spawning", meta = (AllowPrivateAccess = "true"))
 	int32 TopScore;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Effects", meta = (AllowPrivateAccess = "true"))
+	TSubclassOf<class UMatineeCameraShake> CameraShake;
 
 	float EnemiesKilled = 0.f;
 	float CurrentEnemiesKilled = 0.f;

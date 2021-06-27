@@ -23,14 +23,18 @@ void ATwoSidesGameMode::ActorDied(AActor* DeadActor)
     else if (APawnEnemyShip* DeadEnemy = Cast<APawnEnemyShip>(DeadActor))
     {
         EnemiesKilled++;
-        DeadEnemy->HandleDestruction();
         // Update our Scores here and in the UI
-        Score += 100;
+        Score += DeadEnemy->GetScoreValue();
         if (Score > TopScore) 
         {
             TopScore = Score;
         }
         NotifyUIUpdateScore();
+        // Play Camera Shake
+        GetWorld()->GetFirstPlayerController()->PlayerCameraManager->StartCameraShake(CameraShake);
+        // UGameplayStatics::PlayWorldCameraShake(GetWorld(), CameraShake, FVector::ZeroVector, 0, 0);
+        // Destroy the dead enemy
+        DeadEnemy->HandleDestruction();
     }
 }
 

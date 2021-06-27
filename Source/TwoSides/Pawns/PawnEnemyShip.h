@@ -13,6 +13,7 @@ public:
 	APawnEnemyShip();
 	virtual void Tick(float DeltaTime) override;
 	virtual void HandleDestruction() override;
+	int32 GetScoreValue() const;
 
 protected:
 	virtual void BeginPlay() override;
@@ -28,6 +29,8 @@ private:
 	FVector Scale;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Properties", meta = (AllowPrivateAccess = "true"))
 	float DistanceFromPlayer = 120.f;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Properties", meta = (AllowPrivateAccess = "true"))
+	int32 ScoreValue = 100.f;
 
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
