@@ -70,6 +70,7 @@ void APawnShip::ChangeColor()
 void APawnShip::HandleDestruction() 
 {
     Super::HandleDestruction();
+    Destroy();
 }
 
 void APawnShip::MoveUp(float AxisValue) 

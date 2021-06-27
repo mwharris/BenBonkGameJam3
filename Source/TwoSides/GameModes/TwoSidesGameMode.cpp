@@ -16,9 +16,11 @@ void ATwoSidesGameMode::BeginPlay()
 
 void ATwoSidesGameMode::ActorDied(AActor* DeadActor) 
 {
-    if (Cast<APawnShip>(DeadActor))
+    if (PlayerShip == DeadActor)
     {
-        // Player died...
+        NotifyUIUpdateHealth();
+        NotifyUIGameOver();
+        PlayerShip->HandleDestruction();
     }
     else if (APawnEnemyShip* DeadEnemy = Cast<APawnEnemyShip>(DeadActor))
     {
@@ -29,6 +31,15 @@ void ATwoSidesGameMode::ActorDied(AActor* DeadActor)
         NotifyUIUpdateScore();
         // Destroy the dead enemy
         DeadEnemy->HandleDestruction();
+    }
+}
+
+void ATwoSidesGameMode::ActorDamaged(AActor* DamagedActor) 
+{
+    if (DamagedActor == PlayerShip) 
+    {
+        GetWorld()->GetFirstPlayerController()->PlayerCameraManager->StartCameraShake(PlayerShip->DamagedCameraShake);
+        NotifyUIUpdateHealth();
     }
 }
 

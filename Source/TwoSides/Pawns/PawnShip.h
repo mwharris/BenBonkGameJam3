@@ -14,6 +14,9 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	virtual void Tick(float DeltaTime) override;
 	virtual void HandleDestruction() override;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Effects", meta=(AllowPrivateAccess="true"))
+	TSubclassOf<class UMatineeCameraShake> DamagedCameraShake;
 
 protected:
 	virtual void BeginPlay() override;

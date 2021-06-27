@@ -10,8 +10,15 @@ UHealthComponent::UHealthComponent()
 void UHealthComponent::BeginPlay()
 {
 	Super::BeginPlay();
-	Health = DefaultHealth;
+	// Grab a reference to the GameMode
 	GameModeRef = Cast<ATwoSidesGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
+	if (GameModeRef == nullptr)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("UHealthComponent::TakeDamage: No GameModeRef found!"));
+	}
+	// Initialize starting HP
+	Health = DefaultHealth;
+	// Bind our Take Damage function
 	GetOwner()->OnTakeAnyDamage.AddDynamic(this, &UHealthComponent::TakeDamage);
 }
 
@@ -23,17 +30,19 @@ void UHealthComponent::TakeDamage(AActor* DamagedActor, float Damage, const UDam
 		return;
 	}
 	Health -= Damage;
+	// Handle this actor getting killed by notifying the game mode
 	if (Health <= 0)
 	{
 		if (GameModeRef) 
 		{
 			GameModeRef->ActorDied(GetOwner());
 		}
-		else 
-		{
-			UE_LOG(LogTemp, Warning, TEXT("UHealthComponent::TakeDamage: No GameModeRef found!"));
-		}
 	} 
+	// If this actor was not killed, notify Game Mode to update HP (if player)
+	else
+	{
+		GameModeRef->ActorDamaged(GetOwner());
+	}
 }
 
 void UHealthComponent::SetDefaultHealth(float NewHealth) 

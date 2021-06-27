@@ -20,6 +20,7 @@ public:
 	void NotifyUIGameOver();
 
 	void ActorDied(AActor* DeadActor);
+	void ActorDamaged(AActor* DeadActor);
 	void UpdateEnemyCount(int32 Val);
 	void SetCurrentEnemiesKilled(float Val);
 	int32 GetEnemyCount();

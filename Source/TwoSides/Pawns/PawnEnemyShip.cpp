@@ -20,18 +20,18 @@ void APawnEnemyShip::BeginPlay()
     {
         UE_LOG(LogTemp, Error, TEXT("APawnEnemyShip: Cannot find GameMode!"));
     }
-    // Pick red or blue for this enemy
-    SetIsBlue(UKismetMathLibrary::RandomBool(), false);
-    // Set some default values
-    MoveDirectionFlag = UKismetMathLibrary::RandomBool();
-    MovementSpeed = UKismetMathLibrary::RandomFloatInRange(MinSpeed, MaxSpeed);
-    SpawnLocation = GetActorLocation();
     // Grab a reference to the player
     PlayerShip = Cast<APawnShip>(UGameplayStatics::GetPlayerPawn(GetWorld(), 0));
     if (PlayerShip == nullptr) 
     {
 	    UE_LOG(LogTemp, Error, TEXT("APawnEnemyShip couldn't find Player Ship!"));	
     }
+    // Pick red or blue for this enemy
+    SetIsBlue(UKismetMathLibrary::RandomBool(), false);
+    // Set some default values
+    MoveDirectionFlag = UKismetMathLibrary::RandomBool();
+    MovementSpeed = UKismetMathLibrary::RandomFloatInRange(MinSpeed, MaxSpeed);
+    SpawnLocation = GetActorLocation();
 }
 
 void APawnEnemyShip::Tick(float DeltaTime) 
