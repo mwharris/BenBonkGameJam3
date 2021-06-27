@@ -16,6 +16,9 @@ public:
 	bool GetIsBlue();
 
 protected:
+	UPROPERTY(BlueprintReadOnly)
+	class APawnShip* PlayerShip;
+
 	virtual void BeginPlay() override;
 
 private:

@@ -37,13 +37,14 @@ void AEnemySpawner::SpawnEnemy()
             float Delay = UKismetMathLibrary::RandomFloatInRange(EnemyOneDelayMinTime, EnemyOneDelayMaxTime);
             GetWorldTimerManager().SetTimer(EnemyOneDelayTimer, this, &AEnemySpawner::SpawnEnemyOne, Delay, false);
         }
+        // Increment our spawned enemy count
+        GameModeRef->UpdateEnemyCount(GameModeRef->GetEnemyCount() + 1);
     }
 }
 
 void AEnemySpawner::SpawnEnemyOne() 
 {
     if (EnemyOneClass == nullptr) return; 
-    GameModeRef->UpdateEnemyCount(GameModeRef->GetEnemyCount() + 1);
     // Pick a random location in the spawner to spawn
     FVector RandomLocation = UKismetMathLibrary::RandomPointInBoundingBox(GetActorLocation(), GetComponentsBoundingBox().GetExtent());
     RandomLocation.Z = 100;

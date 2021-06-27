@@ -31,11 +31,14 @@ private:
 	float DistanceFromPlayer = 120.f;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Properties", meta = (AllowPrivateAccess = "true"))
 	int32 ScoreValue = 100.f;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Damage", meta = (AllowPrivateAccess = "true"))
+	TSubclassOf<UDamageType> DamageType;
 
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
 
 	class APawnShip* PlayerShip;
+	class ATwoSidesGameMode* GameModeRef;
 	bool MoveDirectionFlag;
 	FVector SpawnLocation;
 

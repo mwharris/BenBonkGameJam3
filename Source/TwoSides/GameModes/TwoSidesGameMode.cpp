@@ -25,10 +25,7 @@ void ATwoSidesGameMode::ActorDied(AActor* DeadActor)
         EnemiesKilled++;
         // Update our Scores here and in the UI
         Score += DeadEnemy->GetScoreValue();
-        if (Score > TopScore) 
-        {
-            TopScore = Score;
-        }
+        if (Score > TopScore) { TopScore = Score; }
         NotifyUIUpdateScore();
         // Destroy the dead enemy
         DeadEnemy->HandleDestruction();

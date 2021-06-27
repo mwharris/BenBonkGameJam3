@@ -3,6 +3,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "TwoSides/Actors/ProjectileBase.h"
+#include "TwoSides/GameModes/TwoSidesGameMode.h"
 #include "TwoSides/Pawns/PawnShip.h"
 
 APawnEnemyShip::APawnEnemyShip() 
@@ -13,6 +14,12 @@ APawnEnemyShip::APawnEnemyShip()
 void APawnEnemyShip::BeginPlay() 
 {
     Super::BeginPlay();
+    // Grab a reference to the game mode
+	GameModeRef = Cast<ATwoSidesGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
+    if (GameModeRef == nullptr) 
+    {
+        UE_LOG(LogTemp, Error, TEXT("APawnEnemyShip: Cannot find GameMode!"));
+    }
     // Pick red or blue for this enemy
     SetIsBlue(UKismetMathLibrary::RandomBool(), false);
     // Set some default values
@@ -37,13 +44,23 @@ void APawnEnemyShip::Tick(float DeltaTime)
 
 void APawnEnemyShip::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit) 
 {
-    // Ignore collisions from projectiles, the player, and other enemies
+    // Ignore collisions from projectiles and other enemies
     if (AProjectileBase* Projectile = Cast<AProjectileBase>(OtherActor)) return;
     if (APawnEnemyShip* EnemyShip = Cast<APawnEnemyShip>(OtherActor)) return;
-    if (OtherActor == PlayerShip) return;
-    UE_LOG(LogTemp, Warning, TEXT("Hit!"));
-    // Reverse our direction
-    MoveDirectionFlag = !MoveDirectionFlag;
+    // Crashed into the player - apply damage if different color
+    if (OtherActor == PlayerShip) 
+    {
+        if ((PlayerShip->GetIsBlue() && !GetIsBlue()) || (!PlayerShip->GetIsBlue() && GetIsBlue()))
+        {
+            UGameplayStatics::ApplyDamage(PlayerShip, 50.f, GetInstigatorController(), this, DamageType);
+        }
+        GameModeRef->ActorDied(this);
+    }
+    // Otherwise, reverse our direction
+    else
+    {
+        MoveDirectionFlag = !MoveDirectionFlag;
+    }
 }
 
 void APawnEnemyShip::HandleDestruction() 
