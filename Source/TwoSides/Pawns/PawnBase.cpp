@@ -40,13 +40,12 @@ void APawnBase::BeginPlay()
 
 void APawnBase::Fire() 
 {
-	if (ProjectileClass != nullptr) {
-		FVector Location = ProjectileSpawnPoint->GetComponentLocation();
-		FRotator Rotation = ProjectileSpawnPoint->GetComponentRotation();
-		AProjectileBase* SpawnedProjectile = GetWorld()->SpawnActor<AProjectileBase>(ProjectileClass, Location, Rotation);
-		SpawnedProjectile->InitProjectile(IsBlue, IsBlue ? BlueMaterial : RedMaterial);
-		SpawnedProjectile->SetOwner(this);
-	}
+	if (ProjectileClass == nullptr) return;
+	FVector Location = ProjectileSpawnPoint->GetComponentLocation();
+	FRotator Rotation = ProjectileSpawnPoint->GetComponentRotation();
+	AProjectileBase* SpawnedProjectile = GetWorld()->SpawnActor<AProjectileBase>(ProjectileClass, Location, Rotation);
+	SpawnedProjectile->InitProjectile(IsBlue, IsBlue ? BlueMaterial : RedMaterial);
+	SpawnedProjectile->SetOwner(this);
 }
 
 void APawnBase::HandleDestruction() 

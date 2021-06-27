@@ -18,13 +18,20 @@ void ATwoSidesGameMode::ActorDied(AActor* DeadActor)
 {
     if (PlayerShip == DeadActor)
     {
+        GameOver = true;
         NotifyUIUpdateHealth();
         NotifyUIGameOver();
         PlayerShip->HandleDestruction();
     }
     else if (APawnEnemyShip* DeadEnemy = Cast<APawnEnemyShip>(DeadActor))
     {
+        if (DeadEnemy->IsBoss()) 
+        {
+            BossesKilled++;
+            UE_LOG(LogTemp, Warning, TEXT("Boss killed!"));
+        }
         EnemiesKilled++;
+        EnemyCount--;
         // Update our Scores here and in the UI
         Score += DeadEnemy->GetScoreValue();
         if (Score > TopScore) { TopScore = Score; }
@@ -63,9 +70,24 @@ int32 ATwoSidesGameMode::GetEnemiesKilled()
     return EnemiesKilled;
 }
 
+int32 ATwoSidesGameMode::GetBossesKilled() 
+{
+    return BossesKilled;
+}
+
+void ATwoSidesGameMode::SetBossesKilled(int32 Val) 
+{
+    BossesKilled = Val;
+}
+
 int32 ATwoSidesGameMode::GetCurrentEnemiesKilled() 
 {
     return CurrentEnemiesKilled;
+}
+
+bool ATwoSidesGameMode::IsGameOver() const
+{
+    return GameOver;
 }
 
 void ATwoSidesGameMode::SetCurrentEnemiesKilled(float Val) 

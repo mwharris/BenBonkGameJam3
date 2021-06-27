@@ -25,6 +25,8 @@ private:
 	float EnemyOneDelayMinTime = 0.5f;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Spawning", meta = (AllowPrivateAccess = "true"))
 	float EnemyOneDelayMaxTime = 0.2f;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Spawning", meta = (AllowPrivateAccess = "true"))
+	int32 RampUpBossFrequency = 4.f;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Enemies", meta = (AllowPrivateAccess = "true"))
 	TSubclassOf<class APawnEnemyShip> EnemyOneClass;

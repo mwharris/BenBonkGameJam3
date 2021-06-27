@@ -23,21 +23,6 @@ protected:
 	class UCapsuleComponent* CapsuleComponent;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	class UHealthComponent* HealthComp;
-
-	UFUNCTION(BlueprintCallable, BlueprintPure)
-	int32 GetHealth();
-	UFUNCTION(BlueprintCallable, BlueprintPure)
-	int32 GetMaxHealth();
-	
-	virtual void BeginPlay() override;
-	void Fire();
-	void ChangeColor();
-
-private:
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
-	USceneComponent* ShipPivotPoint;
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
-	class UStaticMeshComponent* ShipMesh;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	USceneComponent* ProjectileSpawnPoint;
 
@@ -47,6 +32,21 @@ private:
 	UMaterialInstance* BlueMaterial;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Color", meta = (AllowPrivateAccess = "true"))
 	UMaterialInstance* RedMaterial;
+
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	int32 GetHealth();
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	int32 GetMaxHealth();
+	
+	virtual void BeginPlay() override;
+	virtual void Fire();
+	void ChangeColor();
+
+private:
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
+	USceneComponent* ShipPivotPoint;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
+	class UStaticMeshComponent* ShipMesh;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Effects", meta=(AllowPrivateAccess="true"))
 	UParticleSystem* DeathEffect;

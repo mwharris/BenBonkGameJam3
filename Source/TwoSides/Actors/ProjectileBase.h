@@ -13,6 +13,7 @@ public:
 	AProjectileBase();
 	void InitProjectile(bool IsColorBlue, UMaterialInstance* Material);
 	virtual void HandleDestruction();
+	virtual void HandleDestruction(bool Hurt);
 	bool GetIsBlue();
 
 protected:

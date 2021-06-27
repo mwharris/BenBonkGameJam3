@@ -24,7 +24,6 @@ void UHealthComponent::BeginPlay()
 
 void UHealthComponent::TakeDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser) 
 {
-	UE_LOG(LogTemp, Warning, TEXT("We Got Hit, Damage: %f, Before Health: %f, After Health: %f"), Damage, Health, Health - Damage);
 	if (Damage == 0 || Health <= 0) 
 	{
 		return;

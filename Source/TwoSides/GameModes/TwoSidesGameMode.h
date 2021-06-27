@@ -26,7 +26,10 @@ public:
 	int32 GetEnemyCount();
 	int32 GetMaxEnemies();
 	int32 GetEnemiesKilled();
+	int32 GetBossesKilled();
+	void SetBossesKilled(int32 Val);
 	int32 GetCurrentEnemiesKilled();
+	bool IsGameOver() const;
 
 protected:
 	UPROPERTY(BlueprintReadOnly)
@@ -45,6 +48,8 @@ private:
 	int32 TopScore;
 
 	float EnemiesKilled = 0.f;
+	float BossesKilled = 0.f;
 	float CurrentEnemiesKilled = 0.f;
+	bool GameOver = false;
 
 };

@@ -40,26 +40,37 @@ void AProjectileBase::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActo
 	AActor* MyOwner = GetOwner();
 	if (MyOwner == nullptr) return;
 	if (OtherActor != nullptr && OtherActor != this && OtherActor != MyOwner) {
+		bool ShowHurtParticles = false;
 		// Don't apply damage to the player unless we're different colors
-		if (OtherActor == PlayerShip) 
+		if (PlayerShip != nullptr && OtherActor == PlayerShip) 
 		{
 			if ((PlayerShip->GetIsBlue() && !IsBlue) || (!PlayerShip->GetIsBlue() && IsBlue))
 			{
 				UGameplayStatics::ApplyDamage(OtherActor, Damage, MyOwner->GetInstigatorController(), this, DamageType);
+				ShowHurtParticles = true;
 			}
 		}
 		else
 		{
 			UGameplayStatics::ApplyDamage(OtherActor, Damage, MyOwner->GetInstigatorController(), this, DamageType);
+			ShowHurtParticles = true;
 		}
 		// Destroy ourselves
-		HandleDestruction();
+		HandleDestruction(ShowHurtParticles);
 	}
 }
 
 void AProjectileBase::HandleDestruction() 
 {
-	UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), HitEffect, GetActorLocation(), FRotator::ZeroRotator);
+	HandleDestruction(false);
+}
+
+void AProjectileBase::HandleDestruction(bool Hurt) 
+{
+	if (Hurt)
+	{
+		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), HitEffect, GetActorLocation(), FRotator::ZeroRotator);
+	}
 	Destroy();
 }
 
