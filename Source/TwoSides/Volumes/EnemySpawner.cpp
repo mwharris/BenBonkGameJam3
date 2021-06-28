@@ -70,6 +70,5 @@ void AEnemySpawner::SpawnEnemyTwo()
 {
     if (EnemyTwoClass == nullptr || GameModeRef->IsGameOver()) return; 
     GameModeRef->SetCurrentEnemiesKilled(GameModeRef->GetEnemiesKilled());
-    APawnEnemyShip* NewBoss = GetWorld()->SpawnActor<APawnEnemyShip>(EnemyTwoClass, GetActorLocation(), FRotator::ZeroRotator);
-    NewBoss->SetIsBoss(true);
+    GetWorld()->SpawnActor<APawnEnemyShip>(EnemyTwoClass, GetActorLocation(), FRotator::ZeroRotator);
 }

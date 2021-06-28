@@ -45,8 +45,13 @@ void ATwoSidesGameMode::ActorDamaged(AActor* DamagedActor)
 {
     if (DamagedActor == PlayerShip) 
     {
+        PlayerShip->PlayHitSound();
         GetWorld()->GetFirstPlayerController()->PlayerCameraManager->StartCameraShake(PlayerShip->DamagedCameraShake);
         NotifyUIUpdateHealth();
+    }
+    else
+    {
+        UGameplayStatics::PlaySound2D(GetWorld(), EnemyHitSound);
     }
 }
 

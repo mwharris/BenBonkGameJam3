@@ -12,6 +12,7 @@ class TWOSIDES_API APawnBase : public APawn
 public:
 	APawnBase();
 	virtual void HandleDestruction();
+	void PlayHitSound();
 	void SetIsBlue(bool IsNewColorBlue, bool IsPlayer);
 	bool GetIsBlue();
 
@@ -32,6 +33,13 @@ protected:
 	UMaterialInstance* BlueMaterial;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Color", meta = (AllowPrivateAccess = "true"))
 	UMaterialInstance* RedMaterial;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Effects", meta = (AllowPrivateAccess = "true"))
+	class USoundBase* PlayerHitSound;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Effects", meta = (AllowPrivateAccess = "true"))
+	class USoundBase* DeathSound;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Effects", meta = (AllowPrivateAccess = "true"))
+	class USoundBase* ShootSound;
 
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	int32 GetHealth();

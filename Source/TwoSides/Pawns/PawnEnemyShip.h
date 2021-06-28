@@ -15,7 +15,6 @@ public:
 	virtual void HandleDestruction() override;
 	int32 GetScoreValue() const;
 	bool IsBoss();
-	void SetIsBoss(bool Val);
 
 protected:
 	UPROPERTY(BlueprintReadOnly)
@@ -39,6 +38,8 @@ private:
 	FVector Scale;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Properties", meta = (AllowPrivateAccess = "true"))
 	int32 ScoreValue = 100.f;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Properties", meta = (AllowPrivateAccess = "true"))
+	bool Boss = false;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Shooting", meta = (AllowPrivateAccess = "true"))
 	float FireDistance = 120.f;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Shooting", meta = (AllowPrivateAccess = "true"))
@@ -55,7 +56,6 @@ private:
 	bool MoveDirectionFlag;
 	FTimerHandle ShootTimer;
 	bool Shooting = false;
-	bool Boss = false;
 
 	void ShootPlayer();
 

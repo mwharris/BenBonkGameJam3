@@ -46,6 +46,8 @@ private:
 	int32 Score;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Spawning", meta = (AllowPrivateAccess = "true"))
 	int32 TopScore;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Effects", meta = (AllowPrivateAccess = "true"))
+	class USoundBase* EnemyHitSound;
 
 	float EnemiesKilled = 0.f;
 	float BossesKilled = 0.f;

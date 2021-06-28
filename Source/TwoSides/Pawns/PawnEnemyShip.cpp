@@ -111,8 +111,3 @@ bool APawnEnemyShip::IsBoss()
 {
     return Boss;
 }
-
-void APawnEnemyShip::SetIsBoss(bool Val) 
-{
-    Boss = Val;
-}

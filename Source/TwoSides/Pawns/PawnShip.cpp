@@ -52,8 +52,9 @@ void APawnShip::StartFiring()
 {
     if (!CanFire) return; 
     Fire();   
+	UGameplayStatics::PlaySound2D(GetWorld(), ShootSound);
     CanFire = false;
-    GetWorldTimerManager().SetTimer(FireTimer, this, &APawnShip::Fire, FireRate, true);
+    GetWorldTimerManager().SetTimer(FireTimer, this, &APawnShip::PlayerFire, FireRate, true);
 }
 
 void APawnShip::StopFiring() 
@@ -62,9 +63,16 @@ void APawnShip::StopFiring()
     GetWorldTimerManager().ClearTimer(FireTimer);
 }
 
+void APawnShip::PlayerFire() 
+{
+    Fire();
+	UGameplayStatics::PlaySound2D(GetWorld(), ShootSound);
+}
+
 void APawnShip::ChangeColor() 
 {
     SetIsBlue(!GetIsBlue(), true);
+	UGameplayStatics::PlaySound2D(GetWorld(), ChangeColorSound);
 }
 
 void APawnShip::HandleDestruction() 

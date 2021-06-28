@@ -54,6 +54,8 @@ void APawnBase::HandleDestruction()
 	UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), DeathEffect, GetActorLocation(), FRotator::ZeroRotator);
 	// Play camera shake effect
 	GetWorld()->GetFirstPlayerController()->PlayerCameraManager->StartCameraShake(DeathCameraShake);
+	// Play an explosion sound
+    UGameplayStatics::PlaySound2D(GetWorld(), DeathSound);
 }
 
 void APawnBase::SetIsBlue(bool IsNewColorBlue, bool IsPlayer) 
@@ -67,6 +69,11 @@ void APawnBase::SetIsBlue(bool IsNewColorBlue, bool IsPlayer)
     {
         ShipMesh->SetMaterial(IsPlayer ? 1 : 3, RedMaterial);
     }
+}
+
+void APawnBase::PlayHitSound() 
+{
+    UGameplayStatics::PlaySound2D(GetWorld(), PlayerHitSound);
 }
 
 bool APawnBase::GetIsBlue() 

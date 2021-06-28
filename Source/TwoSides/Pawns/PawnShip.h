@@ -28,9 +28,10 @@ private:
 	float MaxTilt = 7;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Properties", meta = (AllowPrivateAccess = "true"))
 	float TiltSpeed = 80;
-
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Properties", meta = (AllowPrivateAccess = "true"))
 	float FireRate = 1.f;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Effects", meta = (AllowPrivateAccess = "true"))
+	class USoundBase* ChangeColorSound;
 
 	float VerticalAxis = 0.f;
 	float HorizontalAxis = 0.f;
@@ -42,6 +43,7 @@ private:
 	void MoveRight(float AxisValue);
 	void StartFiring();
 	void StopFiring();
+	void PlayerFire();
 	void ChangeColor();
 
 	class ATwoSidesGameMode* GameModeRef;
