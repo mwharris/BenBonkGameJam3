@@ -73,6 +73,10 @@ void APawnShip::ChangeColor()
 {
     SetIsBlue(!GetIsBlue(), true);
 	UGameplayStatics::PlaySound2D(GetWorld(), ChangeColorSound);
+    if (GameModeRef != nullptr) 
+    {
+        GameModeRef->NotifyUIColorChange(GetIsBlue());
+    }
 }
 
 void APawnShip::HandleDestruction() 

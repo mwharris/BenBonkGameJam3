@@ -17,6 +17,8 @@ public:
 	UFUNCTION(BlueprintImplementableEvent)
 	void NotifyUIUpdateHealth();
 	UFUNCTION(BlueprintImplementableEvent)
+	void NotifyUIColorChange(bool IsBlue);
+	UFUNCTION(BlueprintImplementableEvent)
 	void NotifyUIGameOver();
 
 	void ActorDied(AActor* DeadActor);
